@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div>
+        <a routerLink="/timelog/form">Go back</a>
+        <br />
+        <br />
+
+        <button (click)="loadList()">Refresh</button>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time IN</th>
+                    <th>Time OUT</th>
+                    <th>Total Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of timeLogs">
+                    <td>{{item.name}}</td>
+                    <td>{{item.dateCreated | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{item.timeIn | date: 'shortTime' }}</td>
+                    <td><span *ngIf="item.timeOut;else noTimeOut">{{item.timeOut | date: 'shortTime' }}</span>
+                        <ng-template #noTimeOut>No Time Out</ng-template>
+                    </td>
+                    <td>{{formatDuration(item.totalHours)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div>
+        <a routerLink="/timelog/list">Go to time logs</a>
+        <br />
+        <div class="card p-4 shadow-lg" style="min-width: 350px;">
+            <h4 class="text-center mb-4">Check In - Check Out</h4>
+            <p class="text-center">{{ currentTimeSubject | async | date: 'medium' }}</p>
+
+            <form>
+                <div class="row">
+                    <div class="col text-center">
+                        <button *ngIf="!inLabel" type="submit" class="btn btn-primary w-100" (click)="clockIn()">
+                            IN
+                        </button>
+                        <ng-container *ngIf="inLabel">
+                            <b>{{ inLabel | date: 'shortTime' }}</b>
+                        </ng-container>
+                    </div>
+                    <div class="col text-center">
+                        <button *ngIf="!outLabel" type="submit" class="btn btn-primary w-100" (click)="clockOut()">
+                            OUT
+                        </button>
+                        <ng-container *ngIf="outLabel">
+                            <b>{{ outLabel | date: 'shortTime'}}</b>
+                        </ng-container>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

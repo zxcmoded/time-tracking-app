@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg" style="min-width: 350px;">
+        <h4 class="text-center mb-4">Login</h4>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-control" formControlName="userName"
+                    required />
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" formControlName="passWord"
+                    required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="!form.valid">
+                Login
+            </button>
+        </form>
+    </div>
+</div>
