@@ -18,6 +18,13 @@ Project Setup
   - in appsettings.json change the connectionstring based on your DB constring
   - type "dotnet ef database update"
   - type "dotnet watch run"
+ 
+  UNIT/INTEGRATION Test
+  - open the test/unit for unit test or test/integration for integration test
+  - type "dotnet restore"
+  - type "dotnet test"
+    <img width="767" alt="image" src="https://github.com/user-attachments/assets/b8d45877-35f7-49d0-82a6-5d425491f73a" />
+
 
   browse the application
   http://localhost:4200
