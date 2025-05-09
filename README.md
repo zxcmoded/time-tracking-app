@@ -9,15 +9,15 @@ Project Setup
 - Run the application
   WEB
   - open the web folder
-  - type <npm-install --legacy-peer-deps>
+  - type "npm-install --legacy-peer-deps"
   - ng serve
  
   API
   - open the tracking-api/api folder
-  - type <dotnet restore>
+  - type "dotnet restore"
   - in appsettings.json change the connectionstring based on your DB constring
-  - type <dotnet ef database update>
-  - type <dotnet watch run>
+  - type "dotnet ef database update"
+  - type "dotnet watch run"
 
   browse the application
   http://localhost:4200
