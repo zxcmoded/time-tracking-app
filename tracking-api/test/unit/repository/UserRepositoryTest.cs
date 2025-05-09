@@ -29,7 +29,7 @@ namespace tracking_app.test.unit.repository
         {
             // Arrange
             var userName = "john_doe";
-            var user = new User { Id = Guid.NewGuid(), Username = userName };
+            var user = new User { Id = Guid.NewGuid(), Username = userName, Password = "123456", DateCreated = DateTime.Now, Name = "John Doe" };
 
             // Add user to the in-memory database
             _dbContext.Users.Add(user);

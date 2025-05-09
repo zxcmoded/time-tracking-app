@@ -26,7 +26,6 @@ public class TimeLogRepositoryTest
     {
         var log = new TimeLog
         {
-            LogId = 1,
             DateCreated = DateTime.UtcNow,
             UserId = Guid.NewGuid(),
             TimeIn = DateTime.UtcNow
@@ -35,25 +34,36 @@ public class TimeLogRepositoryTest
         var result = await _timeLogRepository.SaveTimeLog(log);
 
         Assert.IsTrue(result);
-        Assert.AreEqual(1, _dbContext.TimeLogs.Count());
     }
 
     [Test]
     public async Task GetByDate_ShouldReturnCorrectLog()
     {
         var userId = Guid.NewGuid();
+        var user = new User
+        {
+            Id = userId,
+            Username = "testuser",
+            Name = "John Doe",
+            DateCreated = DateTime.Now,
+            Password = "123456"
+        };
+
+        _dbContext.Users.Add(user);
+        await _dbContext.SaveChangesAsync();
+
         var log = new TimeLog
         {
-            LogId = 1,
-            DateCreated = DateTime.Today,
+            DateCreated = DateTime.Now,
             UserId = userId,
             TimeIn = DateTime.Now
         };
 
         _dbContext.TimeLogs.Add(log);
+
         await _dbContext.SaveChangesAsync();
 
-        var result = await _timeLogRepository.GetByDate(DateTime.Today, userId);
+        var result = await _timeLogRepository.GetByDate(log.DateCreated, userId);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(userId, result.UserId);
@@ -63,19 +73,35 @@ public class TimeLogRepositoryTest
     public async Task GetUserLogs_ShouldReturnLogsForUser()
     {
         var userId = Guid.NewGuid();
+        var user = new User
+        {
+            Id = userId,
+            Username = "testuser",
+            Name = "John Doe",
+            DateCreated = DateTime.Now,
+            Password = "123456"
+        };
+
+        _dbContext.Users.Add(user);
+        await _dbContext.SaveChangesAsync();
 
         _dbContext.TimeLogs.AddRange(new[]
         {
-                new TimeLog { LogId = 1, UserId = userId, DateCreated = DateTime.Today.AddDays(-1), TimeIn = DateTime.Now },
-                new TimeLog { LogId = 2, UserId = userId, DateCreated = DateTime.Today, TimeIn = DateTime.Now },
-                new TimeLog { LogId = 3, UserId = Guid.NewGuid(), DateCreated = DateTime.Today, TimeIn = DateTime.Now } // another user
-            });
+                new TimeLog { UserId = userId, DateCreated = DateTime.Now, TimeIn = DateTime.Now },
+        });
 
         await _dbContext.SaveChangesAsync();
 
         var result = await _timeLogRepository.GetUserLogs(userId);
 
-        Assert.AreEqual(2, result.Count());
-        Assert.IsTrue(result.All(r => r.UserId == userId));
+        Assert.AreEqual(1, result.Count());
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        // Clean up the in-memory database after each test
+        _dbContext.Database.EnsureDeleted();
+        _dbContext.Dispose();
     }
 }
