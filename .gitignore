@@ -6,8 +6,9 @@ web/tmp
 web/out-tsc
 web/bazel-out
 
-/api/bin
-/
+**/bin/
+**/obj/
+
 # Node
 web/node_modules
 npm-debug.log
