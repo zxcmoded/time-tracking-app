@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using tracking_app.Dto;
-using tracking_app.Models;
 using tracking_app.Services;
 
 namespace tracking_app.Controllers;
@@ -12,9 +11,9 @@ namespace tracking_app.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 public class TimeLogController : ControllerBase
 {
-    private readonly ILogger<AuthController> _logger;
+    private readonly ILogger<TimeLogController> _logger;
     private readonly ITimeLogService _timeLogService;
-    public TimeLogController(ILogger<AuthController> logger, ITimeLogService timeLogService)
+    public TimeLogController(ILogger<TimeLogController> logger, ITimeLogService timeLogService)
     {
         _logger = logger;
         _timeLogService = timeLogService;
