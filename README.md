@@ -23,3 +23,7 @@ Project Setup
   http://localhost:4200
   - username: admin
   - password: 123456
+
+<img width="530" alt="image" src="https://github.com/user-attachments/assets/d121f030-1b98-40c9-85c1-2e271f655708" />
+
+<img width="660" alt="image" src="https://github.com/user-attachments/assets/a568292b-7443-4253-9096-af44dddf64fd" />
